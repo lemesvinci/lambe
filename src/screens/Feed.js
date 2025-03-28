@@ -5,10 +5,6 @@ import Post from "../components/Post";
 import { connect } from "react-redux";
 
 class Feed extends Component {
-  state = {
-    posts: [],
-  };
-
   render() {
     return (
       <View style={styles.container}>
@@ -16,7 +12,9 @@ class Feed extends Component {
         <FlatList
           data={this.props.posts}
           keyExtractor={(item) => `${item.id}`}
-          renderItem={({ item }) => <Post key={item.id} {...item} />}
+          renderItem={({ item }) => {
+            return <Post key={item.id} {...item} />;
+          }}
         />
       </View>
     );
@@ -31,8 +29,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5FCFF",
   },
 });
-
-// export default Feed;
 
 const mapStateToProps = ({ posts }) => {
   return {

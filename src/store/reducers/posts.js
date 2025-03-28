@@ -3,39 +3,36 @@ import { ADD_POST, ADD_COMMENT } from "../actions/actionsTypes";
 const initialState = {
   posts: [
     {
-      id: Math.random(),
+      id: "initial-post-1",
       nickname: "Vinicius Junior",
       email: "vinijr@gmail.com",
-      image: require("../../../assets/imgs/fence.jpg"),
+      image: "fence.jpg",
       comments: [
-        {
-          nickname: "Neymar Junior",
-          comment: "É tois",
-        },
-        {
-          nickname: "Mbappé",
-          comment: "Brabo",
-        },
+        { nickname: "Neymar Junior", comment: "É tois" },
+        { nickname: "Mbappé", comment: "Brabo" },
       ],
     },
     {
-      id: Math.random(),
+      id: "initial-post-2",
       nickname: "Raphinha",
       email: "raphinhabr1@gmail.com",
-      image: require("../../../assets/imgs/bw.jpg"),
+      image: "bw.jpg",
       comments: [],
     },
   ],
 };
 
-const reducer = (state = initialState, action) => {
+export default function postsReducer(state = initialState, action) {
   switch (action.type) {
+    case "FETCH_POSTS":
+      return {
+        ...state,
+        posts: [...state.posts, ...action.payload],
+      };
     case ADD_POST:
       return {
         ...state,
-        posts: state.posts.concat({
-          ...action.payload,
-        }),
+        posts: [action.payload, ...state.posts],
       };
     case ADD_COMMENT:
       return {
@@ -54,6 +51,4 @@ const reducer = (state = initialState, action) => {
     default:
       return state;
   }
-};
-
-export default reducer;
+}
