@@ -34,3 +34,5 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+functions/lambe-e5f0c-firebase.json
